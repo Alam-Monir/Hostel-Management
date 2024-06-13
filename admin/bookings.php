@@ -238,7 +238,7 @@
                                 <h4 class="card-title">Total Duration</h4>
                                     <div class="form-group mb-4">
                                         <select class="custom-select mr-sm-2" id="duration" name="duration">
-                                            <option selected>Choose...</option>
+                                            <option selected disabled>Choose...</option>
                                             <option value="1">One Month</option>
                                             <option value="2">Two Month</option>
                                             <option value="3">Three Month</option>
@@ -282,7 +282,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Total Fees Per Month</h4>
+                                <h4 class="card-title">Fees Per Month</h4>
                                     <div class="form-group">
                                         <input type="text" name="fpm" id="fpm" placeholder="Your total fees" class="form-control">
                                     </div>
@@ -296,7 +296,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Total Amount</h4>
                                     <div class="form-group">
-                                        <input type="text" name="ta"  id="ta" placeholder="Total Amount here.." required class="form-control">
+                                        <input type="text" name="ta"  id="ta" placeholder="Total Amount here.." required class="form-control" oninput="calculateTotalAmount()">
                                     </div>
                             </div>
                         </div>
@@ -670,23 +670,50 @@
         }
     </script>
 
+    <!-- Total Amount Calculations -->
+
+    <script>
+    // Function to calculate total amount
+        function calculateTotalAmount() {
+            var duration = document.getElementById('duration').value;
+            var foodStatus = document.querySelector('input[name="foodstatus"]:checked').value;
+            var feesPerMonth = document.getElementById('fpm').value;
+
+            // Calculate total amount based on duration, food status, and fees per month
+            var totalAmount = parseInt(duration) * parseFloat(feesPerMonth);
+            if (foodStatus === '1') {
+                totalAmount += (parseInt(duration) * 1000);
+            }
+
+            // Update total amount input field
+            document.getElementById('ta').value = totalAmount;
+        }
+
+        // Add event listeners to inputs to calculate total amount
+        document.getElementById('duration').addEventListener('change', calculateTotalAmount);
+        document.getElementById('customRadio1').addEventListener('change', calculateTotalAmount);
+        document.getElementById('customRadio2').addEventListener('change', calculateTotalAmount);
+        document.getElementById('fpm').addEventListener('input', calculateTotalAmount);
+
+    </script>
+
 
     <script type="text/javascript">
 
-    $(document).ready(function() {
-        $('#duration').keyup(function(){
-            var fetch_dbid = $(this).val();
-            $.ajax({
-            type:'POST',
-            url :"ins-amt.php?action=userid",
-            data :{userinfo:fetch_dbid},
-            success:function(data){
-            $('.result').val(data);
-            }
-            });
-            
+        $(document).ready(function() {
+            $('#duration').keyup(function(){
+                var fetch_dbid = $(this).val();
+                $.ajax({
+                type:'POST',
+                url :"ins-amt.php?action=userid",
+                data :{userinfo:fetch_dbid},
+                success:function(data){
+                $('.result').val(data);
+                }
+                });
+                
 
-    })});
+        })});
     </script>
 
 </body>
