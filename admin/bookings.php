@@ -84,7 +84,7 @@
         function getUserData(val) {
             $.ajax({
                 type: "POST",
-                url: "get-name.php",
+                url: "get-student-info.php",
                 data: 'regNo=' +val,
                 success: function(data) {
                     var parsedData = JSON.parse(data);
