@@ -350,7 +350,7 @@
                                     <!--  --><!--  --><!--  -->
                                     <h4 class="card-title">Registration Number</h4><!--  --><!--  --><!--  -->
                                     <div class="form-group mb-4">
-                                        <select class="custom-select mr-sm-2" name="room" id="room" onChange="getUserData(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
+                                        <select class="custom-select mr-sm-2" name="regno" id="regno" onChange="getUserData(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
                                             <option selected>Select...</option>
                                             <?php $query ="SELECT * FROM userregistration";
                                             $stmt2 = $mysqli->prepare($query);
