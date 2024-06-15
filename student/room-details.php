@@ -147,7 +147,7 @@
                                             <tr>
                                             <td colspan="6"><b>Total Fees (<?php echo ($dr).' months'?>) : 
                                             <?php if($row->foodstatus==1){ 
-                                            $fd=211; 
+                                            $fd=1000; 
                                             echo 'Rs.'.(($fd+$fpm)*$dr);
                                             } else {
                                             echo 'Rs.'.$dr*$fpm;
