@@ -183,7 +183,12 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Room Number</h4>
+                                <!--  --><!--  --><!--  -->
+                            <!--  --><!--  --><!--  -->
+                                <!--  --><!--  --><!--  -->
+                            <!--  --><!--  --><!--  -->
+                                <!--  --><!--  --><!--  -->
+                                <h4 class="card-title">Room Number</h4><!--  --><!--  --><!--  -->
                                     <div class="form-group mb-4">
                                         <select class="custom-select mr-sm-2" name="room" id="room" onChange="getSeater(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
                                             <option selected>Select...</option>
@@ -313,10 +318,27 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Registration Number</h4>
-                                        <div class="form-group">
-                                            <input type="text" name="regno" id="regno" placeholder="Enter registration number" class="form-control" required>
-                                        </div>
+                                    <!--  --><!--  --><!--  -->
+                                <!--  --><!--  --><!--  -->
+                                    <!--  --><!--  --><!--  -->
+                                <!--  --><!--  --><!--  -->
+                                    <!--  --><!--  --><!--  -->
+                                    <h4 class="card-title">Registration Number</h4><!--  --><!--  --><!--  -->
+                                    <div class="form-group mb-4">
+                                        <select class="custom-select mr-sm-2" name="room" id="room" onChange="get-Firstname(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
+                                            <option selected>Select...</option>
+                                            <?php $query ="SELECT * FROM userregistration";
+                                            $stmt2 = $mysqli->prepare($query);
+                                            $stmt2->execute();
+                                            $res=$stmt2->get_result();
+                                            while($row=$res->fetch_object())
+                                            {
+                                            ?>
+                                            <option value="<?php echo $row->regNo;?>"> <?php echo $row->regNo;?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <span id="room-availability-status" style="font-size:12px;"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
