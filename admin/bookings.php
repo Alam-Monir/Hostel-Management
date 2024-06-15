@@ -284,7 +284,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Fees Per Month</h4>
                                     <div class="form-group">
-                                        <input type="text" name="fpm" id="fpm" placeholder="Your total fees" class="form-control">
+                                        <input type="text" name="fpm" id="fpm" placeholder="Your total fees" class="form-control" readonly>
                                     </div>
                             </div>
                         </div>
@@ -641,17 +641,17 @@
     <script src="../dist/js/pages/dashboards/dashboard1.min.js"></script>
 
     <!-- Custom Ft. Script Lines -->
-<script type="text/javascript">
-	$(document).ready(function(){
-        $('input[type="checkbox"]').click(function(){
-            if($(this).prop("checked") == true){
-                $('#paddress').val( $('#address').val() );
-                $('#pcity').val( $('#city').val() );
-                $('#ppincode').val( $('#pincode').val() );
-            } 
-            
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input[type="checkbox"]').click(function(){
+                if($(this).prop("checked") == true){
+                    $('#paddress').val( $('#address').val() );
+                    $('#pcity').val( $('#city').val() );
+                    $('#ppincode').val( $('#pincode').val() );
+                } 
+                
+            });
         });
-    });
     </script>
     
     <script>
