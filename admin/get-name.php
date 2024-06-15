@@ -25,7 +25,7 @@ if(!empty($_POST["rid"])) {
     while($row=$stmt->fetch(PDO::FETCH_ASSOC))
     {
     ?>
-    <?php echo htmlentities($row['fees']); ?>
+    <?php echo htmlentities($row['firstName']); ?>
     <?php
     }
 }
