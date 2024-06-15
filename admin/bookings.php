@@ -79,6 +79,31 @@
         });
     }
     </script>
+
+    <script>
+        function getUserData(val) {
+            $.ajax({
+                type: "POST",
+                url: "get-name.php",
+                data: 'regNo=' +val,
+                success: function(data) {
+                    var parsedData = JSON.parse(data);
+                    // console.log(parsedData[0].gender);
+                    $('#fname').val(parsedData[0].fname);
+                    $('#mname').val(parsedData[0].mname);
+                    $('#lname').val(parsedData[0].lname);
+                    $('#email').val(parsedData[0].email);
+                    $('#gender').val(parsedData[0].gender);
+                    $('#contact').val(parsedData[0].contact);
+                    $('#course').val(parsedData[0].course);
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error: " + status + " - " + error);
+                }
+            });
+        }
+
+    </script>
     
 </head>
 
@@ -325,7 +350,7 @@
                                     <!--  --><!--  --><!--  -->
                                     <h4 class="card-title">Registration Number</h4><!--  --><!--  --><!--  -->
                                     <div class="form-group mb-4">
-                                        <select class="custom-select mr-sm-2" name="room" id="room" onChange="get-Firstname(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
+                                        <select class="custom-select mr-sm-2" name="room" id="room" onChange="getUserData(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
                                             <option selected>Select...</option>
                                             <?php $query ="SELECT * FROM userregistration";
                                             $stmt2 = $mysqli->prepare($query);
@@ -397,10 +422,10 @@
                             <div class="card-body">
                                 <h4 class="card-title">Gender</h4>
                                     <div class="form-group">
-                                    <select name="gender" class="form-control" required="required">
+                                    <select name="gender" id= "gender" class="form-control" required="required">
                                         <option value="">Select Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                         <option value="others">Others</option>
                                     </select>
                                     </div>
