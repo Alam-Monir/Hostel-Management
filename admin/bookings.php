@@ -208,12 +208,6 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <!--  --><!--  --><!--  -->
-                            <!--  --><!--  --><!--  -->
-                                <!--  --><!--  --><!--  -->
-                            <!--  --><!--  --><!--  -->
-                                <!--  --><!--  --><!--  -->
-                                <h4 class="card-title">Room Number</h4><!--  --><!--  --><!--  -->
                                     <div class="form-group mb-4">
                                         <select class="custom-select mr-sm-2" name="room" id="room" onChange="getSeater(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
                                             <option selected>Select...</option>
@@ -343,12 +337,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <!--  --><!--  --><!--  -->
-                                <!--  --><!--  --><!--  -->
-                                    <!--  --><!--  --><!--  -->
-                                <!--  --><!--  --><!--  -->
-                                    <!--  --><!--  --><!--  -->
-                                    <h4 class="card-title">Registration Number</h4><!--  --><!--  --><!--  -->
+                                    <h4 class="card-title">Registration Number</h4>
                                     <div class="form-group mb-4">
                                         <select class="custom-select mr-sm-2" name="regno" id="regno" onChange="getUserData(this.value);" onBlur="checkAvailability()" required id="inlineFormCustomSelect">
                                             <option selected>Select...</option>
