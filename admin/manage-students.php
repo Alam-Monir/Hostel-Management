@@ -153,7 +153,7 @@
                                         <td><?php echo $row->contactno;?></td>
                                         <td>
                                         <a href="students-profile.php?id=<?php echo $row->id;?>" title="View Full Details"><i class="icon-size-fullscreen"></i></a>&nbsp;&nbsp;
-                                        <a href="manage-students.php?del=<?php echo $row->id;?>" title="Delete Record" onclick="return confirm("Do you want to delete");"><i class="icon-close" style="color:red;"></i></a></td>
+                                        <a href="manage-students.php?del=<?php echo $row->id;?>" title="Delete Record" onclick="return confirm('Do you want to delete this record?');"><i class="icon-close" style="color:red;"></i></a></td>
                                         </tr>
                                             <?php
                                         $cnt=$cnt+1;
