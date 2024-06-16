@@ -157,6 +157,11 @@
                                             <?php
                                         $cnt=$cnt+1;
                                             } ?>
+                                        <style>
+                                          td:nth-child(3) {
+                                            text-align: center;
+                                        }
+                                        </style>
 											
 										
 									</tbody>
