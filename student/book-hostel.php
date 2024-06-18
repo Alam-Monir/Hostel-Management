@@ -288,7 +288,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Total Amount</h4>
                                     <div class="form-group">
-                                        <input type="text" name="ta"  id="ta" placeholder="Total Amount here.." required class="form-control">
+                                        <input type="text" name="ta"  id="ta" placeholder="Total Amount here.." required class="form-control" oninput="calculateTotalAmount()">
                                     </div>
                             </div>
                         </div>
@@ -718,6 +718,31 @@
             // Enable the submit button
             document.getElementById('submitButton').disabled = false;
         }
+    </script>
+
+    <script>
+        // Function to calculate total amount
+        function calculateTotalAmount() {
+            var duration = document.getElementById('duration').value;
+            var foodStatus = document.querySelector('input[name="foodstatus"]:checked').value;
+            var feesPerMonth = document.getElementById('fpm').value;
+
+            // Calculate total amount based on duration, food status, and fees per month
+            var totalAmount = parseInt(duration) * parseFloat(feesPerMonth);
+            if (foodStatus === '1') {
+                totalAmount += (parseInt(duration) * 1000);
+            }
+
+            // Update total amount input field
+            document.getElementById('ta').value = totalAmount;
+        }
+
+        // Add event listeners to inputs to calculate total amount
+        document.getElementById('duration').addEventListener('change', calculateTotalAmount);
+        document.getElementById('customRadio1').addEventListener('change', calculateTotalAmount);
+        document.getElementById('customRadio2').addEventListener('change', calculateTotalAmount);
+        document.getElementById('fpm').addEventListener('input', calculateTotalAmount);
+
     </script>
 
 
