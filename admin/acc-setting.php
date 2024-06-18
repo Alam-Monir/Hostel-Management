@@ -183,7 +183,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Confirm Password</h4>
                                         <div class="form-group">
-                                        <input type="password" class="form-control" value="" required="required" id="cpassword" name="cpassword" >
+                                        <input type="password" class="form-control" value="" required="required" id="confirmpassword" name="confirmpassword" >
                                         </div>
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
 
                         <div class="form-actions">
                             <div class="text-center">
-                                <button type="submit" name="changepwd" class="btn btn-success">Make Changes</button>
+                                <button type="submit" id= "submitBtn" name="changepwd" class="btn btn-success">Make Changes</button>
                                 <button type="reset" class="btn btn-danger">Reset</button>
                             </div>
                         </div>
@@ -291,6 +291,42 @@
         error:function (){}
         });
     }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const oldPasswordInput = document.querySelector('input[name="oldpassword"]');
+            const newPasswordInput = document.querySelector('input[name="newpassword"]');
+            const confirmPasswordInput = document.querySelector('input[name="confirmpassword"]');
+            const submitBtn = document.getElementById('submitBtn');
+
+            function validatePasswords() {
+                const oldPassword = oldPasswordInput.value;
+                const newPassword = newPasswordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+
+                let oldPasswordMatches = false;
+
+                // Simulate an AJAX call to check if the old password matches
+                // For demonstration, assume it always returns true
+                // In a real application, you need to make an actual AJAX call to validate this on the server side
+                oldPasswordMatches = true; // Replace with actual check
+                
+                const passwordsMatch = newPassword === confirmPassword;
+                
+                if (!oldPasswordMatches || !passwordsMatch) {
+                    submitBtn.disabled = true;
+                } else {
+                    submitBtn.disabled = false;
+                }
+            }
+
+            oldPasswordInput.addEventListener('input', validatePasswords);
+            newPasswordInput.addEventListener('input', validatePasswords);
+            confirmPasswordInput.addEventListener('input', validatePasswords);
+
+            validatePasswords(); // Initial check
+        });
     </script>
 
 </body>

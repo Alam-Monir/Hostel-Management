@@ -627,7 +627,7 @@
 
                     <div class="form-actions">
                         <div class="text-center">
-                            <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" id= "submitButton" name="submit" class="btn btn-success">Submit</button>
                             <button type="reset" class="btn btn-dark">Reset</button>
                         </div>
                     </div>
@@ -692,17 +692,76 @@
     
     <script>
         function checkAvailability() {
-        $("#loaderIcon").show();
-        jQuery.ajax({
-        url: "check-availability.php",
-        data:'roomno='+$("#room").val(),
-        type: "POST",
-        success:function(data){
-            $("#room-availability-status").html(data);
-            $("#loaderIcon").hide();
-        },
-            error:function (){}
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "check-availability.php",
+                data: { roomno: $("#room").val() },
+                type: "POST",
+                success: function(data) {
+                    $("#room-availability-status").html(data);
+                    $("#loaderIcon").hide();
+
+                    // Check the response to see if the room is available
+                    if (data.includes("Available")) {
+                        // If the room is available, also check user availability
+                        checkUserAvailability();
+                    } else {
+                        // If the room is not available, make fields read-only and disable submit button
+                        disableFields();
+                    }
+                },
+                error: function() {
+                    $("#loaderIcon").hide();
+                    // Handle the error
+                }
             });
+        }
+
+        function checkUserAvailability() {
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "check-availability.php",
+                data: { regno: $("#regno").val() },
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                    $("#loaderIcon").hide();
+
+                    // Check the response to see if the user registration number is booked
+                    if (data.includes("Booked")) {
+                        alert("Room is already booked under this student id");
+                        // If the registration number is booked, make fields read-only and disable submit button
+                        disableFields();
+                    } else {
+                        // If the registration number is available, enable the fields and submit button
+                        enableFields();
+                    }
+                },
+                error: function() {
+                    $("#loaderIcon").hide();
+                    // Handle the error
+                }
+            });
+        }
+
+        function disableFields() {
+            // Make the other fields read-only
+            document.querySelectorAll('.form-control').forEach(function(element) {
+                element.setAttribute('readonly', true);
+            });
+
+            // Disable the submit button
+            document.getElementById('submitButton').disabled = true;
+        }
+
+        function enableFields() {
+            // Make the other fields editable
+            document.querySelectorAll('.form-control').forEach(function(element) {
+                element.removeAttribute('readonly');
+            });
+
+            // Enable the submit button
+            document.getElementById('submitButton').disabled = false;
         }
     </script>
 

@@ -386,7 +386,7 @@
                         </div>
                     </div>
 
-                    <?php }?>
+                    
 
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card">
@@ -405,23 +405,13 @@
                             <div class="card-body">
                                 <h4 class="card-title">Preferred Course</h4>
                                     <div class="form-group mb-4">
-                                        <select class="custom-select mr-sm-2" id="course" name="course">
-                                            <option selected>Please Select...</option>
-                                            <?php $query ="SELECT * FROM courses";
-                                                $stmt2 = $mysqli->prepare($query);
-                                                $stmt2->execute();
-                                                $res=$stmt2->get_result();
-                                                while($row=$res->fetch_object())
-                                                {
-                                            ?>
-                                            <option value="<?php echo $row->course_fn;?>"><?php echo $row->course_fn;?>&nbsp;&nbsp;(<?php echo $row->course_sn;?>)</option>
-                                            <?php } ?>
-                                        </select>
+                                        <input type="text" name="course" id="course" value="<?php echo $row->course;?>" class="form-control" required readonly>
                                     </div>
                               
                             </div>
                         </div>
                     </div>
+                    <?php }?>
                               
                 </div>
 

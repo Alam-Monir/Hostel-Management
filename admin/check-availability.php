@@ -64,4 +64,22 @@
         
         echo "<span style='color:green'>$left Seats are Available</span>";
     }
+
+    if (isset($_POST['regno'])) {
+        $regno = $mysqli->real_escape_string($_POST['regno']);
+        
+        $query = "SELECT * FROM registration WHERE regNo = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $regno);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            echo "Booked";
+        } else {
+            echo "Available";
+        }
+        
+        $stmt->close();
+    }
 ?>
