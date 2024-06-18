@@ -271,7 +271,7 @@
 
                         <div class="form-actions">
                             <div class="text-center">
-                                <button type="submit" name="submit" class="btn btn-success">Register</button>
+                                <button type="submit" id="submitButton" name="submit" class="btn btn-success">Register</button>
                                 <button type="reset" class="btn btn-danger">Reset</button>
                             </div>
                         </div>
@@ -332,13 +332,32 @@
         success:function(data){
             $("#user-availability-status").html(data);
             $("#loaderIcon").hide();
+
+            if (data.includes("exist")) {
+                    // If the room is available, also check user availability
+                    disableFields();
+                } else {
+                    // If the room is not available, make fields read-only and disable submit button
+                    enableFields();
+                }
+
             },
+
+
                 error:function ()
             {
                 event.preventDefault();
                 alert('error');
             }
         });
+
+        function disableFields() {
+        document.getElementById('submitButton').disabled = true;
+    }
+
+        function enableFields() {
+            document.getElementById('submitButton').disabled = false;
+        }
     }
     </script>
 </body>
