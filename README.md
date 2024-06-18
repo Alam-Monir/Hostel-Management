@@ -1,5 +1,5 @@
-# Hotel management
+# Hostel management
 
-Hotel management
+Hostel management
 <br>
 added readme
