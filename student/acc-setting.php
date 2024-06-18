@@ -167,6 +167,7 @@
                                         <h4 class="card-title">New Password</h4>
                                             <div class="form-group">
                                                 <input type="password" class="form-control" name="newpassword" id="newpassword" value="" required="required">
+                                                <span id="passwordMessage"></span>
                                             </div>
                                         
                                     </div>
@@ -180,6 +181,7 @@
                                         <h4 class="card-title">Confirm Password<h4>
                                             <div class="form-group">
                                                 <input type="password" class="form-control" value="" required="required" id="confirmpassword" name="confirmpassword">
+                                                <span id="confirmPasswordMessage"></span>
                                             </div>
                                     </div>
                                 </div>
@@ -289,6 +291,61 @@
             confirmPasswordInput.addEventListener('input', validatePasswords);
 
             validatePasswords(); // Initial check
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.querySelector('input[name="newpassword"]');
+            const confirmPasswordInput = document.querySelector('input[name="confirmpassword"]');
+            const submitButton = document.getElementById('submitBtn');
+            const passwordMessage = document.getElementById('passwordMessage');
+            const confirmPasswordMessage = document.getElementById('confirmPasswordMessage');
+
+            function validatePasswords() {
+                const password = passwordInput.value.trim(); // Trim whitespace
+                const confirmPassword = confirmPasswordInput.value.trim(); // Trim whitespace
+
+                if (password.length === 0 && confirmPassword.length === 0) {
+                    // Clear messages and return if both fields are empty
+                    hideMessage(passwordMessage);
+                    hideMessage(confirmPasswordMessage);
+                    return;
+                }
+
+                const passwordsMatch = password === confirmPassword;
+
+                if (!passwordsMatch) {
+                    submitButton.disabled = true;
+                    showMessage(confirmPasswordMessage, 'Passwords do not match', 'red');
+                } else {
+                    submitButton.disabled = false;
+                    showMessage(confirmPasswordMessage, 'Passwords match', 'green');
+                }
+            }
+
+            function showMessage(element, message, color) {
+                element.textContent = message;
+                element.style.color = color;
+            }
+
+            function hideMessage(element) {
+                element.textContent = '';
+            }
+
+            passwordInput.addEventListener('input', validatePasswords);
+            confirmPasswordInput.addEventListener('input', validatePasswords);
+
+            // Reset messages when inputs are empty
+            passwordInput.addEventListener('focus', function() {
+                hideMessage(passwordMessage);
+            });
+
+            confirmPasswordInput.addEventListener('focus', function() {
+                hideMessage(confirmPasswordMessage);
+            });
+
+            // Initial check
+            validatePasswords();
         });
     </script>
 </body>

@@ -32,7 +32,7 @@
         $stmt = $mysqli->prepare($query);
         $rc=$stmt->bind_param('iiiisissssssisissississi',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$course,$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cpincode,$paddress,$pcity,$ppincode);
         $stmt->execute();
-        echo"<script>alert('Requested Student Has Been Registered!');</script>";
+        echo"<script>alert('You Have Been Registered!');</script>";
     }
 ?>
 
@@ -403,7 +403,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Emergency Contact Number</h4>
                                         <div class="form-group">
-                                            <input type="number" name="econtact" id="econtact" class="form-control" required>
+                                            <input type="tel" name="econtact" id="econtact" class="form-control" required pattern="[0-9]{10}" maxlength="10">
                                         </div>
                                 </div>
                             </div>
@@ -458,7 +458,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Contact Number</h4>
                                         <div class="form-group">
-                                            <input type="text" name="gcontact" id="gcontact" required class="form-control" placeholder="Enter Guardian's Contact No.">
+                                            <input type="tel" name="gcontact" id="gcontact" required class="form-control" placeholder="Enter Guardian's Contact No." pattern="[0-9]{10}" maxlength="10">
                                         </div>
                                 </div>
                             </div>
@@ -499,7 +499,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Postal Code</h4>
                                         <div class="form-group">
-                                            <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Enter Postal Code" required>
+                                            <input type="tel" name="pincode" id="pincode" class="form-control" placeholder="Enter Postal Code" required pattern="[0-9]{6}" maxlength="6">
                                         </div>
                                 </div>
                             </div>
