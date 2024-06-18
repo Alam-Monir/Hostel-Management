@@ -428,7 +428,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Contact Number</h4>
                                     <div class="form-group">
-                                        <input type="number" name="contact" id="contact" placeholder="Enter contact number" class="form-control" required>
+                                        <input type="tel" name="contact" id="contact" placeholder="Enter contact number" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
                                     </div>
                             </div>
                         </div>
@@ -441,7 +441,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Emergency Contact Number</h4>
                                     <div class="form-group">
-                                        <input type="number" name="econtact" id="econtact" placeholder="Enter emergency contact number" class="form-control" required>
+                                        <input type="tel" name="econtact" id="econtact" placeholder="Enter emergency contact number" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
                                     </div>
                             </div>
                         </div>
@@ -506,7 +506,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Contact Number</h4>
                                         <div class="form-group">
-                                            <input type="text" name="gcontact" id="gcontact" required class="form-control" placeholder="Enter Guardian's Contact No.">
+                                            <input type="tel" name="gcontact" id="gcontact" required class="form-control" placeholder="Enter Guardian's Contact No." pattern="[0-9]{10}" maxlength="10">
                                         </div>
                                 </div>
                             </div>
@@ -547,7 +547,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Postal Code</h4>
                                         <div class="form-group">
-                                            <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Enter Postal Code" required>
+                                            <input type="tel" name="pincode" id="pincode" class="form-control" placeholder="Enter Postal Code" pattern="[0-9]{6}" maxlength="6" required>
                                         </div>
                                 </div>
                             </div>

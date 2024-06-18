@@ -220,7 +220,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Contact Number</h4>
                                         <div class="form-group">
-                                            <input type="number" name="contact" id="contact" placeholder="Your Contact" required="required" class="form-control">
+                                            <input type="tel" name="contact" id="contact" placeholder="Your Contact" required="required" class="form-control" pattern="[0-9]{10}" maxlength="10">
                                         </div>
                                 </div>
                             </div>
