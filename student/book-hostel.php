@@ -131,27 +131,37 @@
                 <form method="POST">
                 
                 <?php
-                    $uid=$_SESSION['login'];
-                    $stmt=$mysqli->prepare("SELECT emailid FROM registration WHERE emailid=? ");
-                    $stmt->bind_param('s',$uid);
+                    $uid = $_SESSION['login'];
+                    $stmt = $mysqli->prepare("SELECT emailid FROM registration WHERE emailid=?");
+                    $stmt->bind_param('s', $uid);
                     $stmt->execute();
-                    $stmt -> bind_result($email);
-                    $rs=$stmt->fetch();
+                    $stmt->bind_result($email);
+                    $rs = $stmt->fetch();
                     $stmt->close();
 
-                    if($rs){ ?>
-                    <div class="alert alert-primary alert-dismissible bg-danger text-white border-0 fade show"
-                        role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </button>
+                    if ($rs) {
+                        echo '<div class="alert alert-primary alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                                 <strong>Info: </strong> You have already booked a hostel!
-                    </div>
-                    <?php }
-                    else{
-						echo "";
-					}			
-				?>	
+                            </div>';
+                        echo '<script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    disableFields();
+                                });
+
+                                function disableFields() {
+                                    document.querySelectorAll(".form-control").forEach(function(element) {
+                                        element.setAttribute("readonly", true);
+                                    });
+                                    document.getElementById("submitButton").disabled = true;
+                                }
+                            </script>';
+                    } else {
+                        echo "";
+                    }
+                ?>	
 
 
                 <div class="col-7 align-self-center">
@@ -291,126 +301,126 @@
 
                 <div class="row">
 
-                <?php	
-                $aid=$_SESSION['id'];
-                    $ret="select * from userregistration where id=?";
+                    <?php	
+                        $aid=$_SESSION['id'];
+                        $ret="select * from userregistration where id=?";
                         $stmt= $mysqli->prepare($ret) ;
-                    $stmt->bind_param('i',$aid);
-                    $stmt->execute();
-                    $res=$stmt->get_result();
+                        $stmt->bind_param('i',$aid);
+                        $stmt->execute();
+                        $res=$stmt->get_result();
 
-                    while($row=$res->fetch_object())
-                    {
-                        ?>
-                
-                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        while($row=$res->fetch_object())
+                        {
+                            ?>
+                    
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Registration Number</h4>
+                                            <div class="form-group">
+                                                <input type="text" name="regno" id="regno" value="<?php echo $row->regNo;?>" class="form-control" readonly>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Registration Number</h4>
+                                    <h4 class="card-title">First Name</h4>
                                         <div class="form-group">
-                                            <input type="text" name="regno" id="regno" value="<?php echo $row->regNo;?>" class="form-control" readonly>
+                                            <input type="text" name="fname" id="fname" value="<?php echo $row->firstName;?>" class="form-control" readonly>
                                         </div>
                                 </div>
                             </div>
                         </div>
 
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">First Name</h4>
-                                    <div class="form-group">
-                                        <input type="text" name="fname" id="fname" value="<?php echo $row->firstName;?>" class="form-control" readonly>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Middle Name</h4>
+                                        <div class="form-group">
+                                            <input type="text" name="mname" id="mname" value="<?php echo $row->middleName;?>" class="form-control" readonly>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Middle Name</h4>
-                                    <div class="form-group">
-                                        <input type="text" name="mname" id="mname" value="<?php echo $row->middleName;?>" class="form-control" readonly>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Last Name</h4>
+                                        <div class="form-group">
+                                            <input type="text" name="lname" id="lname" value="<?php echo $row->lastName;?>" class="form-control" readonly>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Last Name</h4>
-                                    <div class="form-group">
-                                        <input type="text" name="lname" id="lname" value="<?php echo $row->lastName;?>" class="form-control" readonly>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Email</h4>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" value="<?php echo $row->email;?>" class="form-control" readonly>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Email</h4>
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" value="<?php echo $row->email;?>" class="form-control" readonly>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Gender</h4>
+                                        <div class="form-group">
+                                            <input type="text" name="gender" id="gender" value="<?php echo $row->gender;?>" class="form-control" readonly>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Gender</h4>
-                                    <div class="form-group">
-                                        <input type="text" name="gender" id="gender" value="<?php echo $row->gender;?>" class="form-control" readonly>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Contact Number</h4>
+                                        <div class="form-group">
+                                            <input type="number" name="contact" id="contact" value="<?php echo $row->contactNo;?>" class="form-control" readonly>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                        
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Contact Number</h4>
-                                    <div class="form-group">
-                                        <input type="number" name="contact" id="contact" value="<?php echo $row->contactNo;?>" class="form-control" readonly>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Emergency Contact Number</h4>
+                                        <div class="form-group">
+                                            <input type="number" name="econtact" id="econtact" class="form-control" required>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Emergency Contact Number</h4>
-                                    <div class="form-group">
-                                        <input type="number" name="econtact" id="econtact" class="form-control" required>
-                                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Preferred Course</h4>
+                                        <div class="form-group mb-4">
+                                            <input type="text" name="course" id="course" value="<?php echo $row->course;?>" class="form-control" required readonly>
+                                        </div>
+                                
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Preferred Course</h4>
-                                    <div class="form-group mb-4">
-                                        <input type="text" name="course" id="course" value="<?php echo $row->course;?>" class="form-control" required readonly>
-                                    </div>
-                              
-                            </div>
-                        </div>
-                    </div>
                     <?php }?>
                               
                 </div>
@@ -569,7 +579,7 @@
 
                     <div class="form-actions">
                         <div class="text-center">
-                            <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" id= "submitButton" name="submit" class="btn btn-success">Submit</button>
                             <button type="reset" class="btn btn-dark">Reset</button>
                         </div>
                     </div>
@@ -622,32 +632,91 @@
 </body>
 
 <!-- Custom Ft. Script Lines -->
-<script type="text/javascript">
-	$(document).ready(function(){
-        $('input[type="checkbox"]').click(function(){
-            if($(this).prop("checked") == true){
-                $('#paddress').val( $('#address').val() );
-                $('#pcity').val( $('#city').val() );
-                $('#ppincode').val( $('#pincode').val() );
-            } 
-            
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input[type="checkbox"]').click(function(){
+                if($(this).prop("checked") == true){
+                    $('#paddress').val( $('#address').val() );
+                    $('#pcity').val( $('#city').val() );
+                    $('#ppincode').val( $('#pincode').val() );
+                } 
+                
+            });
         });
-    });
     </script>
     
     <script>
         function checkAvailability() {
-        $("#loaderIcon").show();
-        jQuery.ajax({
-        url: "check-availability.php",
-        data:'roomno='+$("#room").val(),
-        type: "POST",
-        success:function(data){
-            $("#room-availability-status").html(data);
-            $("#loaderIcon").hide();
-        },
-            error:function (){}
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "check-availability.php",
+                data: { roomno: $("#room").val() },
+                type: "POST",
+                success: function(data) {
+                    $("#room-availability-status").html(data);
+                    $("#loaderIcon").hide();
+
+                    // Check the response to see if the room is available
+                    if (data.includes("Available")) {
+                        // If the room is available, also check user availability
+                        checkUserAvailability();
+                    } else {
+                        // If the room is not available, make fields read-only and disable submit button
+                        disableFields();
+                    }
+                },
+                error: function() {
+                    $("#loaderIcon").hide();
+                    // Handle the error
+                }
             });
+        }
+
+        function checkUserAvailability() {
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "check-availability.php",
+                data: { regno: $("#regno").val() },
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                    $("#loaderIcon").hide();
+
+                    // Check the response to see if the user registration number is booked
+                    if (data.includes("Booked")) {
+                        alert("Room is already booked under this student id");
+                        // If the registration number is booked, make fields read-only and disable submit button
+                        disableFields();
+                    } else {
+                        // If the registration number is available, enable the fields and submit button
+                        enableFields();
+                    }
+                },
+                error: function() {
+                    $("#loaderIcon").hide();
+                    // Handle the error
+                }
+            });
+        }
+
+        function disableFields() {
+            // Make the other fields read-only
+            document.querySelectorAll('.form-control').forEach(function(element) {
+                element.setAttribute('readonly', true);
+            });
+
+            // Disable the submit button
+            document.getElementById('submitButton').disabled = true;
+        }
+
+        function enableFields() {
+            // Make the other fields editable
+            document.querySelectorAll('.form-control').forEach(function(element) {
+                element.removeAttribute('readonly');
+            });
+
+            // Enable the submit button
+            document.getElementById('submitButton').disabled = false;
         }
     </script>
 

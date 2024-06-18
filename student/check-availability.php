@@ -46,9 +46,18 @@
     $stmt->bind_result($count);
     $stmt->fetch();
     $stmt->close();
-    if($count>0)
-    echo "<span style='color:red'>$count. seats are already full.</span>";
+    $seat_count = "SELECT seater FROM rooms WHERE room_no =?";
+    $stmp = $mysqli->prepare($seat_count);
+    $stmp->bind_param('i',$roomno);
+    $stmp->execute();
+    $stmp->bind_result($count_seats);
+    $stmp->fetch();
+    $stmp->close();
+    $left = $count_seats-$count;
+    if($count!=0 && $count>=$count_seats)
+    echo "<span style='color:red'>Seats already full.</span>";
     else
-        echo "<span style='color:red'>All Seats are Available</span>";
+        
+        echo "<span style='color:green'>$left Seats are Available</span>";
     }
 ?>
